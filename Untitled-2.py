@@ -19,8 +19,15 @@ font = pygame.font.SysFont('Ariel', 70)
 team_a_score = 0
 team_b_score = 0
 
-ducklogoload = pygame.image.load('Duck5goQuack (9).png')
-ducklogo = pygame.transform.scale(ducklogoload, (ducklogoload.get_width()*3, ducklogoload.get_height()*3))
+ducklogo = pygame.image.load('Duck5goQuack (10).png')
+team_a_l = pygame.image.load('Ajax.png')
+a_scale = height / team_a_l.get_height()
+a_width = int(team_a_l.get_width() * a_scale)
+team_a_logo = pygame.transform.scale(team_a_l, (a_width, height))
+team_b_l = pygame.image.load('Banga Korea.png')
+b_scale = height / team_b_l.get_height()
+b_width = int(team_b_l.get_width() * b_scale)
+team_b_logo = pygame.transform.scale(team_b_l, (b_width, height))
 
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Scoreboard')
@@ -32,6 +39,8 @@ run = True
 while run:
     screen.fill(background_colour)
     screen.blit(ducklogo, (0, 0))
+    screen.blit(team_a_logo, (ducklogo.get_width(), 0))
+    screen.blit(team_b_logo, (width - (team_b_logo.get_width()), 0))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -52,11 +61,11 @@ while run:
         team_b_score -= 1
         last_press_time = current_time
 
-    team_a_scoretext = font.render("TeA " + str(team_a_score), True, score_colour)
-    team_b_scoretext = font.render(str(team_b_score) + " TeB", True, score_colour)
+    team_a_scoretext = font.render(str(team_a_score), True, score_colour)
+    team_b_scoretext = font.render(str(team_b_score), True, score_colour)
 
-    screen.blit(team_a_scoretext, (10, 10))
-    screen.blit(team_b_scoretext, ((width - team_b_scoretext.get_width()) - 10, 10))
+    screen.blit(team_a_scoretext, ((ducklogo.get_width() + team_a_logo.get_width() + 10, 50 - (team_a_scoretext.get_height() // 2))))
+    screen.blit(team_b_scoretext, ((width - team_b_logo.get_width()) - 10 - team_b_scoretext.get_width(), 50 - (team_b_scoretext.get_height() // 2)))
 
     pygame.display.flip()
     pygame.display.update()
