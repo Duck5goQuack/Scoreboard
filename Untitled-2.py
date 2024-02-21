@@ -6,8 +6,8 @@ import random #imports random
 from pygame.locals import *
 pygame.init()
 
-width = 350
-height = 75
+width = 1050
+height = 100
 
 fps = 30
 pressed = False
@@ -19,6 +19,9 @@ font = pygame.font.SysFont('Ariel', 70)
 team_a_score = 0
 team_b_score = 0
 
+ducklogoload = pygame.image.load('Duck5goQuack (9).png')
+ducklogo = pygame.transform.scale(ducklogoload, (ducklogoload.get_width()*3, ducklogoload.get_height()*3))
+
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Scoreboard')
 
@@ -28,6 +31,7 @@ last_press_time = 0
 run = True
 while run:
     screen.fill(background_colour)
+    screen.blit(ducklogo, (0, 0))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
