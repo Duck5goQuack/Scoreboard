@@ -12,7 +12,7 @@ height = 75
 fps = 30
 pressed = False
 
-background_colour = (255, 0, 0)
+background_colour = (255, 156, 29)
 score_colour = (0, 0, 0)
 font = pygame.font.SysFont('Ariel', 70)
 

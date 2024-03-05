@@ -16,7 +16,7 @@ fps = 30
 pressed = False
 
 #sets variables for background colour (default red) using hex values, score text colour (default black, also uses hex codes), and the font which the score is written (first value is font itself, second is size (don't change the size))
-background_colour = (255, 0, 0)
+background_colour = (255, 156, 29)
 score_colour = (0, 0, 0)
 font = pygame.font.SysFont('Ariel', 70)
 
@@ -26,11 +26,11 @@ team_b_score = 0
 
 #loads the Duck5goQuack banner, Team A logo and Team B logo, ONLY CHANGE THE COMMENTED LINES
 ducklogo = pygame.image.load('Duck5goQuack (10).png')
-team_a_l = pygame.image.load('Ajax.png') #this can be changed to the team of your choosing
+team_a_l = pygame.image.load('manu.png') #this can be changed to the team of your choosing
 a_scale = height / team_a_l.get_height()
 a_width = int(team_a_l.get_width() * a_scale)
 team_a_logo = pygame.transform.scale(team_a_l, (a_width, height))
-team_b_l = pygame.image.load('Banga Korea.png') #this can be changed to the team of your choosing
+team_b_l = pygame.image.load('Ajax.png') #this can be changed to the team of your choosing
 b_scale = height / team_b_l.get_height()
 b_width = int(team_b_l.get_width() * b_scale)
 team_b_logo = pygame.transform.scale(team_b_l, (b_width, height))
