@@ -25,7 +25,7 @@ team_a_score = 0
 team_b_score = 0
 
 #loads the Duck5goQuack banner, Team A logo and Team B logo, ONLY CHANGE THE COMMENTED LINES
-ducklogo = pygame.image.load('Duck5goQuack (10).png')
+logo = pygame.image.load('kl logo.png')
 team_a_l = pygame.image.load('Ajax.png') #this can be changed to the team of your choosing
 a_scale = height / team_a_l.get_height()
 a_width = int(team_a_l.get_width() * a_scale)
