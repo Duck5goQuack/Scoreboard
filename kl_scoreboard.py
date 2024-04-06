@@ -8,7 +8,7 @@ from pygame.locals import *
 pygame.init()
 
 #sets width and height of scoreboard (might be able to change, wouldn't recommend)
-width = 1050
+width = 1150
 height = 100
 
 #sets fps and pressed variable (do not change)
@@ -18,14 +18,18 @@ pressed = False
 #sets variables for background colour (default red) using hex values, score text colour (default black, also uses hex codes), and the font which the score is written (first value is font itself, second is size (don't change the size))
 background_colour = (255, 156, 29)
 score_colour = (0, 0, 0)
+kl_background = (226, 88, 39)
 font = pygame.font.SysFont('Ariel', 70)
 
 #sets the starting score for both teams
 team_a_score = 0
 team_b_score = 0
 
-#loads the Duck5goQuack banner, Team A logo and Team B logo, ONLY CHANGE THE COMMENTED LINES
-logo = pygame.image.load('kl logo.png')
+#loads the KL banner, Team A logo and Team B logo, ONLY CHANGE THE COMMENTED LINES
+log = pygame.image.load('kl logo.png')
+logo_scale = height / log.get_height()
+logo_width = int(log.get_width() * logo_scale)
+logo = pygame.transform.scale(log, (logo_width, height))
 team_a_l = pygame.image.load('Ajax.png') #this can be changed to the team of your choosing
 a_scale = height / team_a_l.get_height()
 a_width = int(team_a_l.get_width() * a_scale)
@@ -34,6 +38,9 @@ team_b_l = pygame.image.load('Warsaw Eagles.png') #this can be changed to the te
 b_scale = height / team_b_l.get_height()
 b_width = int(team_b_l.get_width() * b_scale)
 team_b_logo = pygame.transform.scale(team_b_l, (b_width, height))
+
+kl_text = font.render("EMC Kings League", True, score_colour)
+kl_title = pygame.Rect(0, 0, kl_text.get_width(), kl_text.get_height() * 2)
 
 #creates the scoreboard window
 screen = pygame.display.set_mode((width, height))
@@ -47,8 +54,10 @@ last_press_time = 0
 run = True
 while run:
     screen.fill(background_colour) #draws background colour, changable higher up
-    screen.blit(ducklogo, (0, 0)) #draws duck banner
-    screen.blit(team_a_logo, (ducklogo.get_width(), 0)) #draws a team logo, changable higher up
+    pygame.draw.rect(screen, kl_background, kl_title)
+    screen.blit(kl_text, (0,height //2  - kl_text.get_height() //2 ))
+    screen.blit(logo, (kl_text.get_width(), 0)) #draws banner
+    screen.blit(team_a_logo, (kl_text.get_width() + logo.get_width(), 0)) #draws a team logo, changable higher up
     screen.blit(team_b_logo, (width - (team_b_logo.get_width()), 0)) #draws b team logo, changeable higher up
 
     for event in pygame.event.get(): #allows you to close the window
@@ -71,11 +80,11 @@ while run:
         last_press_time = current_time
 
     #creates the text for scores
-    team_a_scoretext = font.render(str(team_a_score), True, score_colour) 
-    team_b_scoretext = font.render(str(team_b_score), True, score_colour)
+    team_a_scoretext = font.render("AJX  " + str(team_a_score) , True, score_colour) 
+    team_b_scoretext = font.render(str(team_b_score) + "  WAR", True, score_colour)
 
     #draws the score text
-    screen.blit(team_a_scoretext, ((ducklogo.get_width() + team_a_logo.get_width() + 10, 50 - (team_a_scoretext.get_height() // 2))))
+    screen.blit(team_a_scoretext, ((kl_text.get_width() + logo.get_width() + team_a_logo.get_width() + 10, 50 - (team_a_scoretext.get_height() // 2))))
     screen.blit(team_b_scoretext, ((width - team_b_logo.get_width()) - 10 - team_b_scoretext.get_width(), 50 - (team_b_scoretext.get_height() // 2)))
 
     #updates
