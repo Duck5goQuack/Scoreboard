@@ -3,7 +3,6 @@
 #imports stuff which means it works
 import pygame #import pygame
 import sys #imports system
-import random #imports random
 from pygame.locals import *
 from pynput.keyboard import Key, Listener
 pygame.init()
