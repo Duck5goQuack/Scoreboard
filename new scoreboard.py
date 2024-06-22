@@ -66,9 +66,6 @@ while run:
 
     current_time = pygame.time.get_ticks() #change scores
 
-    on_press(a_score, b_score)
-    on_release()
-
     #creates the text for scores
     team_a_scoretext = font.render(str(a_score), True, score_colour) 
     team_b_scoretext = font.render(str(b_score), True, score_colour)
