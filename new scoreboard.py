@@ -4,7 +4,7 @@
 import pygame #import pygame
 import sys #imports system
 from pygame.locals import *
-from pynput.keyboard import Key, Listener
+from pynput import keyboard
 pygame.init()
 
 #sets width and height of scoreboard (might be able to change, wouldn't recommend)
@@ -34,22 +34,26 @@ pygame.display.set_caption('Scoreboard')
 cooldown_duration = 1000
 last_press_time = 0
 
-def on_press(key, a_score, b_score):
-    if key == Key.f9: #change F9 to key of choosing which REDUCES team a score
-        a_score -= 1 
-    if key == Key.f10: #change F10 to key of choosing which INCREASES team a score
-        a_score += 1
-    if key == Key.f11: #change F11 to key of choosing which INCREASES team b score
-        b_score += 1
-    if key == Key.f12: #change F12 to key of choosing which REDUCES team b score
-        b_score -= 1
+def on_press(key):
+    global a_score, b_score
+    try:
+        if key == keyboard.Key.f9:
+            a_score -= 1
+        elif key == keyboard.Key.f10:
+            a_score += 1
+        elif key == keyboard.Key.f11:
+            b_score += 1
+        elif key == keyboard.Key.f12:
+            b_score -= 1
+    except AttributeError:
+        pass
 
 def on_release(key):
-    if key == Key.esc:
+    if key == keyboard.Key.esc:
         return False
 
-with Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
+listener = keyboard.Listener(on_press=on_press, on_release=on_release)
+listener.start()
 
 #main code loop
 run = True
@@ -83,3 +87,6 @@ while run:
     #updates
     pygame.display.flip()
     pygame.display.update()
+
+listener.stop()
+listener.join()
